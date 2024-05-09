@@ -8,6 +8,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { SettingsComponent } from './components/settings/settings.component';
 import { ModalComponent } from './components/modal/modal.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { PomodoroComponent } from './components/pomodoro/pomodoro.component';
 
 import { MatButtonModule } from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
@@ -16,6 +17,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MenuComponent } from './components/menu/menu.component';
 import { MatListModule } from '@angular/material/list';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 @NgModule({
   declarations: [
@@ -24,6 +26,7 @@ import { MatListModule } from '@angular/material/list';
     ModalComponent,
     DashboardComponent,
     MenuComponent,
+    PomodoroComponent,
   ],
   imports: [
     BrowserModule,
@@ -33,7 +36,8 @@ import { MatListModule } from '@angular/material/list';
     FormsModule,
     MatButtonModule,
     MatIconModule,
-    MatListModule
+    MatListModule,
+    MatGridListModule
   ],
   providers: [
     provideAnimationsAsync()
