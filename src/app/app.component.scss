@@ -1,4 +1,7 @@
 .app-sidenav-container {
+  --visible-drawer-space: 70px;
+
+  background: lightblue;
   position: absolute;
   top: 0;
   bottom: 0;
@@ -6,16 +9,35 @@
   right: 0;
 }
 
+::ng-deep {
+  .mat-drawer {
+    display: block !important;
+    &.mat-drawer-side {
+      transform: translate3d(calc(-100% + var(--visible-drawer-space)), 0, 0);
+      visibility: visible !important; // always visible
+    }
+  }
+
+  .mat-drawer-content {
+    margin-left: var(--visible-drawer-space);
+  }
+}
+
 .app-sidenav-container--menu {
-  padding: 15px;
+  padding: 5px;
 }
 
 .app-sidenav-container--content {
-  padding: 15px;
+  padding: 25px;
 }
 
 .app-sidenav-container--content--open-close-sidenav {
   position: absolute;
   top: 0;
   left: 0;
+}
+
+mat-icon.mat-protected-no-space {
+  margin-right: 0px;
+  margin-left: 0px;
 }

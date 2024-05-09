@@ -9,22 +9,22 @@
       (opened)="handleSidenavOpen()"
       (closed)="handleSidenavClosed"
       >
-      Sidenav content
+      <app-menu></app-menu>
     </mat-sidenav>
     <mat-sidenav-content
       class="app-sidenav-container--content"
       >
       <button
         class="app-sidenav-container--content--open-close-sidenav"
-        mat-button
+        mat-raised-button
         (click)="sidenav.toggle()"
         >
         <mat-icon
+          class="mat-protected-no-space"
           aria-hidden="false"
           aria-label="Menu icon"
-          fontIcon="menu"
-          >
-        </mat-icon>
+          [fontIcon]="opened ? 'keyboard_arrow_left' : 'keyboard_arrow_right'"
+          ></mat-icon>
       </button>
       <router-outlet/>
     </mat-sidenav-content>
