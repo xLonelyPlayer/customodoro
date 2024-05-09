@@ -7,4 +7,13 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'customodoro';
+  opened: boolean = true;
+
+  handleSidenavOpen(): void {
+    return;
+  }
+
+  handleSidenavClosed(): void {
+    return;
+  }
 }

@@ -1,4 +1,33 @@
 <main>
-  <router-outlet />
+  <mat-sidenav-container
+    class="app-sidenav-container"
+    >
+    <mat-sidenav
+      class="app-sidenav-container--menu"
+      #sidenav mode="side"
+      [(opened)]="opened"
+      (opened)="handleSidenavOpen()"
+      (closed)="handleSidenavClosed"
+      >
+      Sidenav content
+    </mat-sidenav>
+    <mat-sidenav-content
+      class="app-sidenav-container--content"
+      >
+      <button
+        class="app-sidenav-container--content--open-close-sidenav"
+        mat-button
+        (click)="sidenav.toggle()"
+        >
+        <mat-icon
+          aria-hidden="false"
+          aria-label="Menu icon"
+          fontIcon="menu"
+          >
+        </mat-icon>
+      </button>
+      <router-outlet/>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
 </main>
 
