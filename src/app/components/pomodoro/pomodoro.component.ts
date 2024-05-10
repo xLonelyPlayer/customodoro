@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
+import { Storage } from '../../models/storage';
 
-const SOUND_ON = true;
-const DEFAULT_WORK_TIME_DURATION = 1500;
-const DEFAULT_SHORT_BREAK_DURATION = 300;
+const SOUND_ON: boolean = true;
+const DEFAULT_WORK_TIME_DURATION: number = 1500;
+const DEFAULT_SHORT_BREAK_DURATION: number = 300;
+
+const POMODORO_LOCAL_STORAGE_KEY: string = "pomodoro_state";
 
 @Component({
   selector: 'app-pomodoro',
@@ -10,6 +13,24 @@ const DEFAULT_SHORT_BREAK_DURATION = 300;
   styleUrl: './pomodoro.component.scss'
 })
 export class PomodoroComponent {
+
+  constructor(private storage: Storage) {
+  }
+
+  ngOnInit() {
+    console.log(this.storage.getItem(POMODORO_LOCAL_STORAGE_KEY));
+    const pomodoro_state = this.storage.getItem(POMODORO_LOCAL_STORAGE_KEY);
+    if (pomodoro_state && pomodoro_state.length) {
+      this.cycles = pomodoro_state;
+    }
+    debugger;
+  }
+
+  ngOnDestroy() {
+    this.storage.setItem(POMODORO_LOCAL_STORAGE_KEY, this.cycles);
+  }
+
+
 
   at_work: boolean = false;
   cycles: Cycle[] = [

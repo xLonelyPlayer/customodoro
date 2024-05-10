@@ -20,6 +20,8 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatDialogModule } from '@angular/material/dialog';
 import { AlertComponent } from './components/modals/alert/alert.component';
 
+import { Storage } from './models/storage';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,10 +41,11 @@ import { AlertComponent } from './components/modals/alert/alert.component';
     MatIconModule,
     MatListModule,
     MatGridListModule,
-    MatDialogModule
+    MatDialogModule,
   ],
   providers: [
-    provideAnimationsAsync()
+    provideAnimationsAsync(),
+    Storage
   ],
   bootstrap: [AppComponent]
 })
