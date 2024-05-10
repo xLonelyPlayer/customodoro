@@ -1,19 +1,22 @@
 <section>
   <mat-list role="list">
     <mat-list-item role="listitem">
-      <button mat-button [routerLink]="''">
-        Dashboard
-      </button>
+      <app-button [routerLink]="''" mx="0">
+        <i class="fa-solid fa-house"></i>
+        <span>Dashboard</span>
+      </app-button>
     </mat-list-item>
     <mat-list-item role="listitem">
-      <button mat-button [routerLink]="'/customodoro'">
-        Customodoro
-      </button>
+      <app-button [routerLink]="'/customodoro'" mx="0">
+        <i class="fa-regular fa-clock"></i>
+        <span>Customodoro</span>
+      </app-button>
     </mat-list-item>
     <mat-list-item role="listitem">
-      <button mat-button [routerLink]="'/settings'">
-        Settings
-      </button>
+      <app-button [routerLink]="'/settings'" mx="0">
+        <i class="fa-solid fa-gear"></i>
+        <span>Settings</span>
+      </app-button>
     </mat-list-item>
   </mat-list>
 </section>

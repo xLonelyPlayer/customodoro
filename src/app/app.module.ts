@@ -9,8 +9,8 @@ import { SettingsComponent } from './components/settings/settings.component';
 import { ModalComponent } from './components/modal/modal.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { PomodoroComponent } from './components/pomodoro/pomodoro.component';
+import { ButtonComponent } from './components/button/button.component';
 
-import { MatButtonModule } from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -27,6 +27,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
     DashboardComponent,
     MenuComponent,
     PomodoroComponent,
+    ButtonComponent,
   ],
   imports: [
     BrowserModule,
@@ -34,7 +35,6 @@ import { MatGridListModule } from '@angular/material/grid-list';
     MatSidenavModule,
     MatCheckboxModule,
     FormsModule,
-    MatButtonModule,
     MatIconModule,
     MatListModule,
     MatGridListModule

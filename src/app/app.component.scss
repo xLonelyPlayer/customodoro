@@ -1,7 +1,8 @@
 .app-sidenav-container {
   --visible-drawer-space: 50px;
 
-  background: lightblue;
+  color: white;
+  background-color: rgb(80, 80, 80);
   position: absolute;
   top: 0;
   bottom: 0;
@@ -28,16 +29,26 @@
 }
 
 .app-sidenav-container--content {
+  position: relative;
   padding: 25px;
 }
 
 .app-sidenav-container--content--open-close-sidenav {
   position: absolute;
-  top: 0;
-  left: 0;
+  left: -13px;
 }
 
 mat-icon.mat-protected-no-space {
   margin-right: 0px;
   margin-left: 0px;
+}
+
+.dragable-taskbar {
+  position: absolute;
+  height: 30px;
+  top: 0;
+  left: 0;
+  right: 0;
+  -webkit-user-select: none;
+  -webkit-app-region: drag;
 }

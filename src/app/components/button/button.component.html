@@ -1,1 +1,12 @@
-<p>button works!</p>
+<button
+  [class]="btnClass"
+  [type]="type"
+  (click)="onClick.emit($event)"
+  >
+  <span #icon [ngStyle]="iconStyle">
+    <ng-content select="i"></ng-content>
+  </span>
+  <span #label>
+    <ng-content select="span"></ng-content>
+  </span>
+</button>

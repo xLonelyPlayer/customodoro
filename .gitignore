@@ -8,6 +8,7 @@
 
 # Node
 /node_modules
+/customodoro-win32-x64
 npm-debug.log
 yarn-error.log
 

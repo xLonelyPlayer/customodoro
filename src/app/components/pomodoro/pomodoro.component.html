@@ -1,25 +1,24 @@
-<section>
-  <mat-grid-list cols="1" rowHeight="2:1">
-    <mat-grid-tile>
-      <mat-list role="list">
-        <mat-list-item role="listitem" class="align-items-center">
-          <h2>{{ currentCycle?.label || 'Sem informação' }}</h2>
-        </mat-list-item>
-        <mat-list-item role="listitem" class="align-items-center">
-          <h2>{{ displayTimer }}</h2>
-        </mat-list-item>
-        <mat-list-item role="listitem" class="align-items-center">
-          <button mat-button (click)="handleOnStart($event)">
-            <mat-icon class="mat-protected-no-space" fontIcon="play_circle_outline"></mat-icon>
-          </button>
-          <button mat-button (click)="handleOnPause($event)">
-            <mat-icon class="mat-protected-no-space" fontIcon="pause_circle_outline"></mat-icon>
-          </button>
-          <button mat-button (click)="handleOnSkip($event)">
-            <mat-icon class="mat-protected-no-space" fontIcon="skip_next"></mat-icon>
-          </button>
-        </mat-list-item>
-      </mat-list>
-    </mat-grid-tile>
-  </mat-grid-list>
-</section>
+<div>
+  <div class="row">
+    <div class="col-12 align-items-center">
+      <h2>{{ currentCycle?.label || 'Sem informação' }}</h2>
+    </div>
+    <div class="col-12 align-items-center">
+      <h2>{{ displayTimer }}</h2>
+    </div>
+    <div class="col-12 align-items-center">
+      <app-button (onClick)="handleOnStart($event)">
+        <i class="fa-solid fa-play"></i>
+        <span>Play</span>
+      </app-button>
+      <app-button (onClick)="handleOnPause($event)">
+        <i class="fa-solid fa-pause"></i>
+        <span>Pause</span>
+      </app-button>
+      <app-button (onClick)="handleOnSkip($event)">
+        <i class="fa-solid fa-forward"></i>
+        <span>Skip</span>
+      </app-button>
+    </div>
+  </div>
+</div>

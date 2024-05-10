@@ -12,20 +12,15 @@
       <app-menu></app-menu>
     </mat-sidenav>
     <mat-sidenav-content
-      class="app-sidenav-container--content"
+      class="app-sidenav-container--content h-100 d-flex align-items-center justify-content-center"
       >
-      <button
+      <div class="dragable-taskbar"></div>
+      <app-button
         class="app-sidenav-container--content--open-close-sidenav"
-        mat-raised-button
-        (click)="sidenav.toggle()"
+        (onClick)="sidenav.toggle()"
         >
-        <mat-icon
-          class="mat-protected-no-space"
-          aria-hidden="false"
-          aria-label="Menu icon"
-          [fontIcon]="opened ? 'keyboard_arrow_left' : 'keyboard_arrow_right'"
-          ></mat-icon>
-      </button>
+        <i [class]="opened ? 'fa-solid fa-chevron-left' : 'fa-solid fa-chevron-right'"></i>
+      </app-button>
       <router-outlet/>
     </mat-sidenav-content>
   </mat-sidenav-container>
