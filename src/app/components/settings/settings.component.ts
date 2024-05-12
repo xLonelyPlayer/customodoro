@@ -11,8 +11,4 @@ export class SettingsComponent {
   constructor(public bridge: Bridge) {
   }
 
-  handleOnTestButton(event: Event) {
-    console.log('teste');
-    this.bridge.testeEvento();
-  }
 }

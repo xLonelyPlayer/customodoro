@@ -1,7 +1,7 @@
 export class Bridge {
-  private browserWindows: BrowserWindow = window as any;
-  private versions: AppVersions = this.browserWindows.versions;
-  private events: AppEvents = this.browserWindows.events;
+  private browserWindow: BrowserWindow = window as any;
+  private versions: AppVersions = this.browserWindow.versions;
+  private events: AppEvents = this.browserWindow.events;
 
   constructor() {
   }
@@ -32,9 +32,15 @@ export class Bridge {
     return response;
   }
 
-  async testeEvento(): Promise<void> {
-    const response = await this.events.teste();
-    console.log(response)
+  closeApp(): void {
+    this.events.closeApp();
+  }
+
+  saveToStorageOnClose(data: any): Function {
+    return this.events.saveToStorageOnClose(async () => {
+      await this.saveToStorage(data);
+      this.closeApp();
+    });
   }
 }
 
@@ -54,6 +60,8 @@ interface AppEvents {
   teste: Function;
   saveToStorage: Function;
   getFromStorage: Function;
+  saveToStorageOnClose: Function;
+  closeApp: Function;
 }
 
 interface AppStorageEventsResponse {

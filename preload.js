@@ -1,4 +1,4 @@
-const { ipcRenderer, contextBridge } = require('electron');
+const { ipcRenderer, contextBridge } = require("electron");
 
 const VERSIONS = {
   chrome: process.versions.chrome,
@@ -20,9 +20,11 @@ const EVENTS = {
   },
   getFromStorage: (data) => {
     return ipcRenderer.invoke("getFromStorage", data);
-  }
+  },
+  saveToStorageOnClose: (callback) => ipcRenderer.on("saveToStorageOnClose", (_event, value) => callback(value)),
+  closeApp: () => ipcRenderer.invoke("closeApp"),
 }
 
-contextBridge.exposeInMainWorld( 'events', EVENTS );
-contextBridge.exposeInMainWorld( 'api', WINDOW_API );
-contextBridge.exposeInMainWorld( 'versions', VERSIONS );
+contextBridge.exposeInMainWorld( "events", EVENTS );
+contextBridge.exposeInMainWorld( "api", WINDOW_API );
+contextBridge.exposeInMainWorld( "versions", VERSIONS );

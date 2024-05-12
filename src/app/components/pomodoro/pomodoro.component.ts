@@ -20,20 +20,24 @@ export class PomodoroComponent {
   }
 
   ngOnInit() {
-    this.loadStorage();
+    this.getStorage();
+    this.storage.setOnClose(POMODORO_STORAGE_KEY, this.cycles);
   }
 
   ngOnDestroy() {
-    this.storage.set(POMODORO_STORAGE_KEY, this.cycles);
+    this.setStorage();
   }
 
-  async loadStorage(): Promise<void> {
+  async getStorage(): Promise<void> {
     const response = await this.storage.get(POMODORO_STORAGE_KEY);
-    console.log("response", response);
     if (response.success) {
       const savedCycles = response.storageData as Cycle[];
       this.cycles = savedCycles;
     }
+  }
+
+  setStorage(): void {
+    this.storage.set(POMODORO_STORAGE_KEY, this.cycles);
   }
 
   at_work: boolean = false;

@@ -11,11 +11,12 @@ const {
 app.setAppUserModelId("Customodoro");
 
 let window;
+let status = 0;
 
 const isDev = !app.isPackaged;
 if (isDev) {
     console.log("DEVELOPMENT MODE");
-    require('electron-reload')(__dirname);
+    require("electron-reload")(__dirname);
 }
 
 function createWindow () {
@@ -39,9 +40,12 @@ function createWindow () {
   setWindowConfig(window);
 
   window.setMenu(null);
-
-  window.on("moved", () => saveWindowPosition(window.getPosition()))
-  window.on("resized", () => saveWindowBounds(window.getSize()));
+  window.on("moved", () => {
+    saveWindowPosition(window.getPosition());
+  });
+  window.on("resized", () => {
+    saveWindowBounds(window.getSize());
+  });
 
   if (isDev) {
     window.loadURL(`http://localhost:4200/`)
@@ -53,15 +57,29 @@ function createWindow () {
     window.webContents.openDevTools()
   }
 
-  window.on("closed", function () {
-    window = null
-  })
+  window.on("close", function (e) {
+    if (status == 0 && window) {
+      e.preventDefault();
+      window.webContents.send("saveToStorageOnClose");
+    }
+  });
+
 }
+
 
 app.on("ready", () => {
   ipcMain.handle("teste", () => "testado");
   ipcMain.handle("saveToStorage", saveToStorage);
   ipcMain.handle("getFromStorage", getFromStorage);
+
+  ipcMain.handle("closeApp", () => {
+    status = 1;
+    window = null;
+    if (process.platform !== "darwin") {
+        app.quit();
+    }
+  });
+
   createWindow();
 });
 

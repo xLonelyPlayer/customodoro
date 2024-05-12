@@ -43,6 +43,7 @@ function saveWindowPosition(position) {
 }
 
 function saveToStorage(event, data) {
+  console.log("data", data);
   const { key, value } = data;
   storage.set(key, value);
   return { success: true, storageData: data.value, savedTo: key };

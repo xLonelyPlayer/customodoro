@@ -4,7 +4,6 @@ import { Bridge } from "../bridge/bridge";
 @Injectable()
 export class Storage {
 
-
   constructor(private bridge: Bridge) {
   }
 
@@ -12,13 +11,12 @@ export class Storage {
     this.bridge.saveToStorage({key, value});
   }
 
-  /**
-   *
-   * @param key
-   * @returns AppEventsResponse
-   */
   get(key: string) {
     return this.bridge.getFromStorage({ key });
+  }
+
+  setOnClose(key: string, value: any): Function {
+    return this.bridge.saveToStorageOnClose({ key, value });
   }
 
 }
