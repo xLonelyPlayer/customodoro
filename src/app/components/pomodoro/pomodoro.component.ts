@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Storage } from '../../models/storage';
+import { Storage } from '../../models/storage/storage';
 
 const SOUND_ON: boolean = true;
 const DEFAULT_WORK_TIME_DURATION: number = 1500;
@@ -23,7 +23,6 @@ export class PomodoroComponent {
     if (pomodoro_state && pomodoro_state.length) {
       this.cycles = pomodoro_state;
     }
-    debugger;
   }
 
   ngOnDestroy() {

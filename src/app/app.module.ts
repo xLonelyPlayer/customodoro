@@ -19,8 +19,10 @@ import { MatListModule } from '@angular/material/list';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatDialogModule } from '@angular/material/dialog';
 import { AlertComponent } from './components/modals/alert/alert.component';
+import { AboutComponent } from './components/about/about.component'
 
-import { Storage } from './models/storage';
+import { Storage } from './models/storage/storage';
+import { Bridge } from './models/bridge/bridge';
 
 @NgModule({
   declarations: [
@@ -31,6 +33,7 @@ import { Storage } from './models/storage';
     PomodoroComponent,
     ButtonComponent,
     AlertComponent,
+    AboutComponent,
   ],
   imports: [
     BrowserModule,
@@ -45,7 +48,8 @@ import { Storage } from './models/storage';
   ],
   providers: [
     provideAnimationsAsync(),
-    Storage
+    Storage,
+    Bridge
   ],
   bootstrap: [AppComponent]
 })

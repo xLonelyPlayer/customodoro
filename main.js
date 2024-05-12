@@ -1,4 +1,5 @@
 const { app, BrowserWindow } = require('electron')
+const path = require('node:path')
 
 app.setAppUserModelId('Customodoro');
 
@@ -16,6 +17,7 @@ function createWindow () {
     backgroundColor: '#ffffff',
     icon: `file://${__dirname}/dist/customodoro/browser/assets/logo.png`,
     webPreferences: {
+      preload: path.join(__dirname, 'preload.js'),
       backgroundThrottling : false,
     },
     alwaysOnTop: true,
