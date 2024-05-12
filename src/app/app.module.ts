@@ -23,6 +23,7 @@ import { AboutComponent } from './components/about/about.component'
 
 import { Storage } from './models/storage/storage';
 import { Bridge } from './models/bridge/bridge';
+import { Window } from './models/window/window';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { Bridge } from './models/bridge/bridge';
   providers: [
     provideAnimationsAsync(),
     Storage,
-    Bridge
+    Bridge,
+    Window,
   ],
   bootstrap: [AppComponent]
 })

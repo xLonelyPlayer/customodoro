@@ -33,7 +33,11 @@ export class Bridge {
   }
 
   saveToStorageOnClose(callback: Function): Function {
-    return this.events.saveToStorageOnClose(() => callback({ close: this.events.closeApp }));
+    return this.events.saveToStorageOnClose(callback);
+  }
+
+  closeApp(): void {
+    this.events.closeApp();
   }
 }
 

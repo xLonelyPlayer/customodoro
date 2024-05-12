@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Storage } from '../../models/storage/storage';
-import { AppWindowActions } from '../../models/bridge/bridge';
+import { Window } from '../../models/window/window';
 
 const SOUND_ON: boolean = true;
 const DEFAULT_WORK_TIME_DURATION: number = 1500;
@@ -17,15 +17,15 @@ export class PomodoroComponent {
 
   constructor(
     private storage: Storage,
+    private window: Window,
   ) {
   }
 
   ngOnInit() {
     this.getStorage();
-    // FIXME Transfer callback to another class to be used as window actions across the app
-    this.storage.setOnClose((windowActions: AppWindowActions) => {
+    this.storage.setOnClose(() => {
       this.setStorage();
-      windowActions.close();
+      this.window.close();
     });
   }
 
