@@ -1,21 +1,15 @@
-const { contextBridge } = require('electron')
+const { ipcRenderer, contextBridge, ipcMain } = require('electron')
 
-contextBridge.exposeInMainWorld('versions', {
-  node: () => nodeVersion(),
-  chrome: () => chromeVersion(),
-  electron: () => electronVersion(),
-  appVersion: "beta-0.0.1"
-  // we can also expose variables, not just functions
-})
-
-const chromeVersion = () => {
-  return process.versions.chrome;
+const VERSIONS = {
+  chrome: process.versions.chrome,
+  node: process.version.node,
+  electron: process.version.node,
+  app: "beta-0.0.1",
 }
 
-const nodeVersion = () => {
-  return process.version.node;
+const WINDOW_API = {
+  getSize: () => ipcRenderer.invoke("get/window/size"),
 }
 
-const electronVersion = () => {
-  return process.version.electron;
-}
+contextBridge.exposeInMainWorld( 'versions', VERSIONS );
+contextBridge.exposeInMainWorld( 'api', WINDOW_API );

@@ -5,20 +5,20 @@ export class Bridge {
   constructor() {
   }
 
-  getChromeVersion() {
-    return this.versions.chrome() as string;
+  getChromeVersion(): string {
+    return this.versions.chrome;
   }
 
-  getAppVersion() {
-    return this.versions.appVersion;
+  getAppVersion(): string {
+    return this.versions.app;
   }
 
-  getElectronVersion() {
-    return this.versions.electron();
+  getElectronVersion(): string {
+    return this.versions.electron;
   }
 
-  getNodeVersion() {
-    return this.versions.node();
+  getNodeVersion(): string {
+    return this.versions.node;
   }
 }
 
@@ -27,8 +27,8 @@ interface BrowserWindow {
 }
 
 interface AppVersions {
-  node: () => {},
-  chrome: () => {},
-  electron: () => {},
-  appVersion: string,
+  node: string,
+  chrome: string,
+  electron: string,
+  app: string,
 }
