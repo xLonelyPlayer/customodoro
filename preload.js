@@ -1,4 +1,4 @@
-const { ipcRenderer, contextBridge, ipcMain } = require('electron')
+const { ipcRenderer, contextBridge } = require('electron')
 
 const VERSIONS = {
   chrome: process.versions.chrome,
@@ -11,5 +11,13 @@ const WINDOW_API = {
   getSize: () => ipcRenderer.invoke("get/window/size"),
 }
 
-contextBridge.exposeInMainWorld( 'versions', VERSIONS );
+const EVENTS = {
+  teste: () => {
+    console.log('aoba');
+    return ipcRenderer.invoke("teste");
+  },
+}
+
+contextBridge.exposeInMainWorld( 'events', EVENTS );
 contextBridge.exposeInMainWorld( 'api', WINDOW_API );
+contextBridge.exposeInMainWorld( 'versions', VERSIONS );

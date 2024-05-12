@@ -1,71 +1,74 @@
-const { app, BrowserWindow } = require('electron')
-const path = require('node:path')
+const { app, BrowserWindow, ipcMain, ipcRenderer } = require("electron");
+const path = require("node:path");
+const { getWinSettings, saveBounds } = require("./settings");
 
-app.setAppUserModelId('Customodoro');
+app.setAppUserModelId("Customodoro");
 
-let win;
+let window;
 
-if (!app.isPackaged) {
+const isDev = !app.isPackaged;
+if (isDev) {
+    console.log("DEVELOPMENT MODE");
     require('electron-reload')(__dirname);
 }
 
 function createWindow () {
-  // Create the browser window.
-  win = new BrowserWindow({
-    width: 800,
-    height: 600,
-    backgroundColor: '#ffffff',
+
+  const bounds = getWinSettings();
+  if (isDev) {
+    console.log(`APP BOUNDS [${bounds[0]}]x[${bounds[1]}]`);
+  }
+
+  window = new BrowserWindow({
+    width: bounds[0], height: bounds[1],
+    backgroundColor: "#ffffff",
     icon: `file://${__dirname}/dist/customodoro/browser/assets/logo.png`,
     webPreferences: {
-      preload: path.join(__dirname, 'preload.js'),
+      preload: path.join(__dirname, "preload.js"),
       backgroundThrottling : false,
     },
-    alwaysOnTop: true,
     frame: false,
-    titleBarStyle: 'hidden',
+    titleBarStyle: "hidden",
     titleBarOverlay: {
-      color: '#00000000',
-      symbolColor: '#000000'
+      color: "#00000000",
+      symbolColor: "#000000"
     },
     thickFrame: true,
-  })
+  });
 
-  win.setMenu(null);
+  window.setMenu(null);
 
-  if (!app.isPackaged) {
-    console.log("DEVELOPMENT MODE")
-    win.loadURL(`http://localhost:4200/`)
+  window.on("resized", () => saveBounds(window.getSize()));
+
+  if (isDev) {
+    window.loadURL(`http://localhost:4200/`)
   } else {
-    win.loadURL(`file://${__dirname}/dist/customodoro/browser/index.html`)
+    window.loadURL(`file://${__dirname}/dist/customodoro/browser/index.html`)
   }
 
-
-  //// uncomment below to open the DevTools.
-  if (!app.isPackaged) {
-    win.webContents.openDevTools()
+  if (isDev) {
+    window.webContents.openDevTools()
   }
 
-  // Event when the window is closed.
-  win.on('closed', function () {
-    win = null
+  window.on("closed", function () {
+    window = null
   })
 }
 
-// Create window on electron intialization
-app.on('ready', createWindow)
+app.on("ready", () => {
+  ipcMain.handle("teste", () => "testado");
+  createWindow();
+});
 
-// Quit when all windows are closed.
-app.on('window-all-closed', function () {
+app.on("window-all-closed", function () {
 
-  // On macOS specific close process
-  if (process.platform !== 'darwin') {
+  if (process.platform !== "darwin") {
     app.quit()
   }
 })
 
-app.on('activate', function () {
-  // macOS specific close process
-  if (win === null) {
+app.on("activate", function () {
+  if (window === null) {
     createWindow()
   }
 })
