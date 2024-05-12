@@ -9,6 +9,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "electron": "electron .",
+    "electron-dev": "electron .",
     "electron-build": "ng build --configuration production && electron .",
     "package": "electron-packager . --platform=win32 --overwrite"
   },
@@ -26,6 +27,7 @@
     "@angular/router": "^17.3.0",
     "@fortawesome/fontawesome-free": "^6.5.2",
     "bootstrap": "^5.3.3",
+    "electron-reload": "^2.0.0-alpha.1",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.3"

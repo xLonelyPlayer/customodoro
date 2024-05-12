@@ -4,6 +4,10 @@ app.setAppUserModelId('Customodoro');
 
 let win;
 
+if (!app.isPackaged) {
+    require('electron-reload')(__dirname);
+}
+
 function createWindow () {
   // Create the browser window.
   win = new BrowserWindow({
@@ -24,13 +28,20 @@ function createWindow () {
     thickFrame: true,
   })
 
-
   win.setMenu(null);
-  win.loadURL(`file://${__dirname}/dist/customodoro/browser/index.html`)
+
+  if (!app.isPackaged) {
+    console.log("DEVELOPMENT MODE")
+    win.loadURL(`http://localhost:4200/`)
+  } else {
+    win.loadURL(`file://${__dirname}/dist/customodoro/browser/index.html`)
+  }
 
 
   //// uncomment below to open the DevTools.
-  // win.webContents.openDevTools()
+  if (!app.isPackaged) {
+    win.webContents.openDevTools()
+  }
 
   // Event when the window is closed.
   win.on('closed', function () {
