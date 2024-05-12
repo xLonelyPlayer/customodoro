@@ -1,6 +1,10 @@
-const { app, BrowserWindow, ipcMain, ipcRenderer } = require("electron");
+const { app, BrowserWindow, ipcMain } = require("electron");
 const path = require("node:path");
-const { getWinSettings, saveBounds } = require("./settings");
+const {
+    setWindowConfig,
+    saveWindowBounds,
+    saveWindowPosition,
+  } = require("./settings");
 
 app.setAppUserModelId("Customodoro");
 
@@ -14,13 +18,7 @@ if (isDev) {
 
 function createWindow () {
 
-  const bounds = getWinSettings();
-  if (isDev) {
-    console.log(`APP BOUNDS [${bounds[0]}]x[${bounds[1]}]`);
-  }
-
   window = new BrowserWindow({
-    width: bounds[0], height: bounds[1],
     backgroundColor: "#ffffff",
     icon: `file://${__dirname}/dist/customodoro/browser/assets/logo.png`,
     webPreferences: {
@@ -36,9 +34,12 @@ function createWindow () {
     thickFrame: true,
   });
 
+  setWindowConfig(window);
+
   window.setMenu(null);
 
-  window.on("resized", () => saveBounds(window.getSize()));
+  window.on("moved", () => saveWindowPosition(window.getPosition()))
+  window.on("resized", () => saveWindowBounds(window.getSize()));
 
   if (isDev) {
     window.loadURL(`http://localhost:4200/`)

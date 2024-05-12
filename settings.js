@@ -1,7 +1,22 @@
 const Store = require("electron-store");
 const storage = new Store();
 
-function getWinSettings() {
+function setWindowConfig(window) {
+  const bounds = getWindowBounds();
+  console.log(`APP BOUNDS [${bounds}]`);
+
+  if (bounds && bounds.length == 2) {
+    window.setSize(bounds[0], bounds[1]);
+  }
+
+  const position = getWindowPosition();
+  console.log(`APP POSITOON [${position}]`);
+  if (position && position.length == 2) {
+    window.setPosition(position[0], position[1]);
+  }
+}
+
+function getWindowBounds() {
   const default_bounds = [800, 600];
 
   const size = storage.get("window-size");
@@ -13,12 +28,23 @@ function getWinSettings() {
   return default_bounds;
 }
 
-function saveBounds(bounds) {
-  console.log(`NEW APP BOUNDS ${bounds[0]} ${bounds[1]}`);
+function saveWindowBounds(bounds) {
   storage.set("window-size", bounds);
 }
 
+function getWindowPosition() {
+  const position = storage.get("window-position");
+  if (position) {
+    return position;
+  }
+}
+
+function saveWindowPosition(position) {
+  storage.set("window-position", position);
+}
+
 module.exports = {
-  getWinSettings,
-  saveBounds,
+  setWindowConfig,
+  getWindowBounds, saveWindowBounds,
+  getWindowPosition, saveWindowPosition,
 }
