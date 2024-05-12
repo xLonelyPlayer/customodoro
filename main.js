@@ -4,6 +4,8 @@ const {
     setWindowConfig,
     saveWindowBounds,
     saveWindowPosition,
+    saveToStorage,
+    getFromStorage,
   } = require("./settings");
 
 app.setAppUserModelId("Customodoro");
@@ -58,6 +60,8 @@ function createWindow () {
 
 app.on("ready", () => {
   ipcMain.handle("teste", () => "testado");
+  ipcMain.handle("saveToStorage", saveToStorage);
+  ipcMain.handle("getFromStorage", getFromStorage);
   createWindow();
 });
 

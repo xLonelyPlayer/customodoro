@@ -1,4 +1,4 @@
-const { ipcRenderer, contextBridge } = require('electron')
+const { ipcRenderer, contextBridge } = require('electron');
 
 const VERSIONS = {
   chrome: process.versions.chrome,
@@ -13,9 +13,14 @@ const WINDOW_API = {
 
 const EVENTS = {
   teste: () => {
-    console.log('aoba');
     return ipcRenderer.invoke("teste");
   },
+  saveToStorage: (data) => {
+    return ipcRenderer.invoke("saveToStorage", data);
+  },
+  getFromStorage: (data) => {
+    return ipcRenderer.invoke("getFromStorage", data);
+  }
 }
 
 contextBridge.exposeInMainWorld( 'events', EVENTS );

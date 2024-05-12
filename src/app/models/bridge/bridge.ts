@@ -22,6 +22,16 @@ export class Bridge {
     return this.versions.node;
   }
 
+  async saveToStorage(data: any): Promise<AppStorageEventsResponse> {
+    const response = await this.events.saveToStorage(data);
+    return response;
+  }
+
+  async getFromStorage(data: any): Promise<AppStorageEventsResponse> {
+    const response = await this.events.getFromStorage(data);
+    return response;
+  }
+
   async testeEvento(): Promise<void> {
     const response = await this.events.teste();
     console.log(response)
@@ -41,5 +51,13 @@ interface AppVersions {
 }
 
 interface AppEvents {
-  teste: any;
+  teste: Function;
+  saveToStorage: Function;
+  getFromStorage: Function;
+}
+
+interface AppStorageEventsResponse {
+  success: boolean;
+  storageData: any;
+  savedTo: string;
 }

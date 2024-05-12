@@ -1,27 +1,24 @@
 import { Injectable } from "@angular/core";
+import { Bridge } from "../bridge/bridge";
 
 @Injectable()
 export class Storage {
 
-  constructor() {
+
+  constructor(private bridge: Bridge) {
   }
 
-  setItem(key: string, value: any): void {
-    localStorage.setItem(key, JSON.stringify(value));
+  set(key: string, value: any) {
+    this.bridge.saveToStorage({key, value});
   }
 
-  getItem(key: string, parse: boolean = true): any {
-    if (!this.hasKey(key)) {
-      return;
-    }
-
-    const storage = localStorage.getItem(key);
-
-    return parse && storage ? JSON.parse(storage) : storage;
-  }
-
-  private hasKey(key: string): boolean {
-    return localStorage.hasOwnProperty(key);
+  /**
+   *
+   * @param key
+   * @returns AppEventsResponse
+   */
+  get(key: string) {
+    return this.bridge.getFromStorage({ key });
   }
 
 }

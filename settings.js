@@ -4,7 +4,6 @@ const storage = new Store();
 function setWindowConfig(window) {
   const bounds = getWindowBounds();
   console.log(`APP BOUNDS [${bounds}]`);
-
   if (bounds && bounds.length == 2) {
     window.setSize(bounds[0], bounds[1]);
   }
@@ -43,8 +42,22 @@ function saveWindowPosition(position) {
   storage.set("window-position", position);
 }
 
+function saveToStorage(event, data) {
+  const { key, value } = data;
+  storage.set(key, value);
+  return { success: true, storageData: data.value, savedTo: key };
+}
+
+function getFromStorage(event, data) {
+  const { key } = data;
+  const storageData = storage.get(key);
+  return { success: storageData ? true : false, storageData, savedTo: key };
+}
+
 module.exports = {
   setWindowConfig,
-  getWindowBounds, saveWindowBounds,
-  getWindowPosition, saveWindowPosition,
+  saveWindowBounds,
+  saveWindowPosition,
+  saveToStorage,
+  getFromStorage,
 }
