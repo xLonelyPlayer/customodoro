@@ -9,7 +9,6 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "electron": "electron .",
-    "electron-dev": "electron .",
     "electron-build": "ng build --configuration production && electron .",
     "package": "electron-packager . --platform=win32 --overwrite"
   },

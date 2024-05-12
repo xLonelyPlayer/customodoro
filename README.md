@@ -19,8 +19,14 @@ Inicialmente é básico com um cronômetro de 25 minutos e outro 5 minutos.
 * Modo minimalista para esconder label das telas principais
 ## Para desenvolvedores
 ```
-npm install // Instalar os pacotes
-npm start // Desenvolver em localhost
-npm run electron-build // Testar aplicativo
-npm run package // Gerar pasta com executável final
+// Instala os pacotes
+npm install
+
+// Primeiro execute esse comando em um terminal para iniciar o ng serve em localhost:4200
+npm start
+// Em seguida execute o electron que irá identificar que o app não está buildado e irá renderizar o localhost:4200
+npm run electron // Testar aplicativo
+
+// Compila o app para um .exe. Resultado é uma pasta chamada comodoro-win32-x64
+npm run package
 ```
