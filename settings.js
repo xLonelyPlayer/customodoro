@@ -42,14 +42,13 @@ function saveWindowPosition(position) {
   storage.set("window-position", position);
 }
 
-function saveToStorage(event, data) {
-  console.log("data", data);
+function saveToStorage(_, data) {
   const { key, value } = data;
   storage.set(key, value);
   return { success: true, storageData: data.value, savedTo: key };
 }
 
-function getFromStorage(event, data) {
+function getFromStorage(_, data) {
   const { key } = data;
   const storageData = storage.get(key);
   return { success: storageData ? true : false, storageData, savedTo: key };

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Storage } from '../../models/storage/storage';
+import { AppWindowActions } from '../../models/bridge/bridge';
 
 const SOUND_ON: boolean = true;
 const DEFAULT_WORK_TIME_DURATION: number = 1500;
@@ -21,7 +22,10 @@ export class PomodoroComponent {
 
   ngOnInit() {
     this.getStorage();
-    this.storage.setOnClose(POMODORO_STORAGE_KEY, this.cycles);
+    this.storage.setOnClose((windowActions: AppWindowActions) => {
+      this.setStorage();
+      windowActions.close();
+    });
   }
 
   ngOnDestroy() {

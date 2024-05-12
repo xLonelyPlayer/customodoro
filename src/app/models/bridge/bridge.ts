@@ -32,15 +32,8 @@ export class Bridge {
     return response;
   }
 
-  closeApp(): void {
-    this.events.closeApp();
-  }
-
-  saveToStorageOnClose(data: any): Function {
-    return this.events.saveToStorageOnClose(async () => {
-      await this.saveToStorage(data);
-      this.closeApp();
-    });
+  saveToStorageOnClose(callback: Function): Function {
+    return this.events.saveToStorageOnClose(() => callback({ close: this.events.closeApp }));
   }
 }
 
@@ -68,4 +61,11 @@ interface AppStorageEventsResponse {
   success: boolean;
   storageData: any;
   savedTo: string;
+}
+
+export interface AppWindowActions {
+  /**
+   * Closes application when called as a function;
+   */
+  close: Function;
 }
