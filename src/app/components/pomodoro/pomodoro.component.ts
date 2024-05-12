@@ -22,6 +22,7 @@ export class PomodoroComponent {
 
   ngOnInit() {
     this.getStorage();
+    // FIXME Transfer callback to another class to be used as window actions across the app
     this.storage.setOnClose((windowActions: AppWindowActions) => {
       this.setStorage();
       windowActions.close();

@@ -72,6 +72,7 @@ app.on("ready", () => {
   ipcMain.handle("saveToStorage", saveToStorage);
   ipcMain.handle("getFromStorage", getFromStorage);
 
+  // FIXME Study to move this function from here if possible
   ipcMain.handle("closeApp", () => {
     status = 1;
     window = null;

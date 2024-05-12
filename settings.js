@@ -3,13 +3,11 @@ const storage = new Store();
 
 function setWindowConfig(window) {
   const bounds = getWindowBounds();
-  console.log(`APP BOUNDS [${bounds}]`);
   if (bounds && bounds.length == 2) {
     window.setSize(bounds[0], bounds[1]);
   }
 
   const position = getWindowPosition();
-  console.log(`APP POSITOON [${position}]`);
   if (position && position.length == 2) {
     window.setPosition(position[0], position[1]);
   }

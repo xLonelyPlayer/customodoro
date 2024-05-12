@@ -12,15 +12,8 @@ const WINDOW_API = {
 }
 
 const EVENTS = {
-  teste: () => {
-    return ipcRenderer.invoke("teste");
-  },
-  saveToStorage: (data) => {
-    return ipcRenderer.invoke("saveToStorage", data);
-  },
-  getFromStorage: (data) => {
-    return ipcRenderer.invoke("getFromStorage", data);
-  },
+  saveToStorage: (data) => ipcRenderer.invoke("saveToStorage", data),
+  getFromStorage: (data) => ipcRenderer.invoke("getFromStorage", data),
   saveToStorageOnClose: (callback) => ipcRenderer.on("saveToStorageOnClose", (_event, value) => callback(value)),
   closeApp: () => ipcRenderer.invoke("closeApp"),
 }
