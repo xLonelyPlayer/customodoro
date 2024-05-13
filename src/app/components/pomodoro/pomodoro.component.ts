@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { Storage } from '../../models/storage/storage';
-import { Window } from '../../models/window/window';
 
 const SOUND_ON: boolean = true;
 const DEFAULT_WORK_TIME_DURATION: number = 1500;
@@ -15,18 +14,21 @@ const POMODORO_STORAGE_KEY: string = "pomodoro_state";
 })
 export class PomodoroComponent {
 
+  storageSaver: any = null;
+
+  at_work: boolean = false;
+  cycles: Cycle[] = [
+    { order: 0, id: 'work_time', label: 'Work time', duration: DEFAULT_WORK_TIME_DURATION, active: true },
+    { order: 1, id: 'short_break', label: 'Short break', duration: DEFAULT_SHORT_BREAK_DURATION, active: false }
+  ];
+
   constructor(
     private storage: Storage,
-    private window: Window,
   ) {
   }
 
   ngOnInit() {
     this.getStorage();
-    this.storage.setOnClose(() => {
-      this.setStorage();
-      this.window.close();
-    });
   }
 
   ngOnDestroy() {
@@ -44,12 +46,6 @@ export class PomodoroComponent {
   setStorage(): void {
     this.storage.set(POMODORO_STORAGE_KEY, this.cycles);
   }
-
-  at_work: boolean = false;
-  cycles: Cycle[] = [
-    { order: 0, id: 'work_time', label: 'Work time', duration: DEFAULT_WORK_TIME_DURATION, active: true },
-    { order: 1, id: 'short_break', label: 'Short break', duration: DEFAULT_SHORT_BREAK_DURATION, active: false }
-  ];
 
   get currentCycle(): Cycle | undefined {
     const current = this.cycles.find(cycle => cycle.active);
@@ -130,17 +126,29 @@ export class PomodoroComponent {
   handleOnStart(_e: Event): void {
     this.at_work = true;
     this.workCycle();
+    this.storageSaver = this.startStorageSaver();
     return;
+  }
+
+  startStorageSaver(): any {
+    return setTimeout(() => {
+      this.setStorage();
+      this.storageSaver = this.startStorageSaver();
+    }, 15000);
   }
 
   handleOnPause(_e: Event): void {
     this.at_work = false;
+    clearTimeout(this.storageSaver);
+    this.setStorage();
     return;
   }
 
   handleOnSkip(_e: Event): void {
     this.at_work = false;
     this.alternateCycle({ notify: true, sound: false });
+    clearTimeout(this.storageSaver);
+    this.setStorage();
     return;
   }
 }

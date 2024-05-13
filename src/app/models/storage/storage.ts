@@ -15,8 +15,4 @@ export class Storage {
     return this.bridge.getFromStorage({ key });
   }
 
-  setOnClose(callback: Function): Function {
-    return this.bridge.saveToStorageOnClose(callback);
-  }
-
 }

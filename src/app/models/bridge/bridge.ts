@@ -32,10 +32,6 @@ export class Bridge {
     return response;
   }
 
-  saveToStorageOnClose(callback: Function): Function {
-    return this.events.saveToStorageOnClose(callback);
-  }
-
   closeApp(): void {
     this.events.closeApp();
   }
@@ -57,7 +53,6 @@ interface AppEvents {
   teste: Function;
   saveToStorage: Function;
   getFromStorage: Function;
-  saveToStorageOnClose: Function;
   closeApp: Function;
 }
 

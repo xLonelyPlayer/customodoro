@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Bridge } from '../../models/bridge/bridge';
 
 @Component({
   selector: 'app-settings',
@@ -8,7 +7,7 @@ import { Bridge } from '../../models/bridge/bridge';
 })
 export class SettingsComponent {
 
-  constructor(public bridge: Bridge) {
+  constructor() {
   }
 
 }

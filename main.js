@@ -58,10 +58,6 @@ function createWindow () {
   }
 
   window.on("close", function (e) {
-    if (status == 0 && window) {
-      e.preventDefault();
-      window.webContents.send("saveToStorageOnClose");
-    }
   });
 
 }

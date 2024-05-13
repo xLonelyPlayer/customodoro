@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Bridge } from '../../models/bridge/bridge';
+import { Window } from '../../models/window/window';
 
 @Component({
   selector: 'app-about',
@@ -8,7 +9,13 @@ import { Bridge } from '../../models/bridge/bridge';
 })
 export class AboutComponent {
 
-  constructor(public bridge: Bridge) {
+  constructor(
+    public bridge: Bridge, // FIXME It is set to public only to be used temporarily on template for debug pourpose. Can be removed in the future.
+    private window: Window,
+  ) {
+  }
+
+  ngOnInit() {
   }
 
 }
