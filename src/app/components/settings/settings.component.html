@@ -3,17 +3,22 @@
     <h2>Settings</h2>
   </div>
 </div>
-<form [formGroup]="form" (ngSubmit)="save()">
+<form [formGroup]="form" (ngSubmit)="submit()">
   <div class="row form-group" formGroupName="notification">
-    <h4>Notificações</h4>
+    <h4>Notifications</h4>
     <div class="form-control col-12">
-      <mat-slide-toggle formControlName="active">
-        <label class="mat-slide-toggle-label">Ativar notificações</label>
+      <mat-slide-toggle formControlName="notify">
+        <label class="mat-slide-toggle-label">Activate notifications</label>
       </mat-slide-toggle>
     </div>
     <div class="form-control col-12">
       <mat-slide-toggle formControlName="sound">
-        <label class="mat-slide-toggle-label">Efeito sonoro</label>
+        <label class="mat-slide-toggle-label">Sound effect</label>
+      </mat-slide-toggle>
+    </div>
+    <div class="form-control col-12">
+      <mat-slide-toggle formControlName="soundOnSkip">
+        <label class="mat-slide-toggle-label">Sound effect on skip</label>
       </mat-slide-toggle>
     </div>
   </div>

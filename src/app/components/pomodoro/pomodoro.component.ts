@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
 import { StorageService } from '../../models/storage/storage.service';
+import { AlternateCycleOptions, Cycle } from '../../views/pomodoro';
+import { EnvironmentService } from '../../models/environment/environment.service';
 
-const SOUND_ON: boolean = true;
-const DEFAULT_WORK_TIME_DURATION: number = 1500;
-const DEFAULT_SHORT_BREAK_DURATION: number = 300;
-
-const POMODORO_STORAGE_KEY: string = "pomodoro_state";
+const DEFAULT_WORK_TIME_DURATION: number = 10;
+const DEFAULT_SHORT_BREAK_DURATION: number = 5;
 
 @Component({
   selector: 'app-pomodoro',
@@ -15,7 +14,6 @@ const POMODORO_STORAGE_KEY: string = "pomodoro_state";
 export class PomodoroComponent {
 
   storageSaver: any = null;
-
   at_work: boolean = false;
   cycles: Cycle[] = [
     { order: 0, id: 'work_time', label: 'Work time', duration: DEFAULT_WORK_TIME_DURATION, active: true },
@@ -24,6 +22,7 @@ export class PomodoroComponent {
 
   constructor(
     private storage: StorageService,
+    private env: EnvironmentService
   ) {
   }
 
@@ -36,7 +35,7 @@ export class PomodoroComponent {
   }
 
   async getStorage(): Promise<void> {
-    const response = await this.storage.get(POMODORO_STORAGE_KEY);
+    const response = await this.storage.get(this.env.STORAGE_KEYS.customodoro);
     if (response.success) {
       const savedCycles = response.storageData as Cycle[];
       this.cycles = savedCycles;
@@ -44,7 +43,7 @@ export class PomodoroComponent {
   }
 
   setStorage(): void {
-    this.storage.set(POMODORO_STORAGE_KEY, this.cycles);
+    this.storage.set(this.env.STORAGE_KEYS.customodoro, this.cycles);
   }
 
   get currentCycle(): Cycle | undefined {
@@ -67,6 +66,14 @@ export class PomodoroComponent {
 
     if (this.currentCycle.duration <= -1) {
       this.alternateCycle();
+
+      if (this.env.NOTIFICATION_SETTINGS.notify) {
+        this.notify();
+      }
+
+      if (this.env.NOTIFICATION_SETTINGS.sound) {
+        this.playSound();
+      }
     }
 
     setTimeout(() => {
@@ -74,7 +81,7 @@ export class PomodoroComponent {
     }, 1000);
   }
 
-  alternateCycle(options: AlternateCycleOptions = { notify: true, sound: true }): void {
+  alternateCycle(): void {
     if (!this.currentCycle) {
       return;
     }
@@ -84,21 +91,16 @@ export class PomodoroComponent {
     if (next >= 2) { next = 0 }
 
     this.cycles[next].active = true;
-    this.cycles[index].duration = this.cycles[index].id == 'work_time' ? DEFAULT_WORK_TIME_DURATION : DEFAULT_SHORT_BREAK_DURATION
+    this.cycles[index].duration = this.cycles[index].id == 'work_time' ?
+      DEFAULT_WORK_TIME_DURATION :
+      DEFAULT_SHORT_BREAK_DURATION;
     this.cycles[index].active = false;
-
-    if (options.sound) {
-      this.playSound();
-    }
-    if (options.notify) {
-      this.notify();
-    }
 
     return;
   }
 
   playSound(): void {
-    if (!SOUND_ON || !this.currentCycle) {
+    if (!this.env.NOTIFICATION_SETTINGS.notify || !this.env.NOTIFICATION_SETTINGS.sound || !this.currentCycle) {
       return;
     }
 
@@ -146,22 +148,18 @@ export class PomodoroComponent {
 
   handleOnSkip(_e: Event): void {
     this.at_work = false;
-    this.alternateCycle({ notify: true, sound: false });
+    this.alternateCycle();
+
+    if (this.env.NOTIFICATION_SETTINGS.notify) {
+      this.notify();
+    }
+
+    if (this.env.NOTIFICATION_SETTINGS.soundOnSkip) {
+      this.playSound();
+    }
+
     clearTimeout(this.storageSaver);
     this.setStorage();
     return;
   }
-}
-
-interface Cycle {
-  order: number;
-  id: string;
-  label: string;
-  duration: number;
-  active: boolean;
-}
-
-interface AlternateCycleOptions {
-  notify?: boolean;
-  sound?: boolean;
 }

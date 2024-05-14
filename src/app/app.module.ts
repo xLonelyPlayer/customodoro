@@ -26,6 +26,7 @@ import { AboutComponent } from './components/about/about.component'
 import { StorageService } from './models/storage/storage.service';
 import { BridgeService } from './models/bridge/bridge.service';
 import { WindowService } from './models/window/window.service';
+import { EnvironmentService } from './models/environment/environment.service';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { WindowService } from './models/window/window.service';
     StorageService,
     BridgeService,
     WindowService,
+    EnvironmentService
   ],
   bootstrap: [AppComponent]
 })
