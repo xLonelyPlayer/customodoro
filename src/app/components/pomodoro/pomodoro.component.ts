@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Storage } from '../../models/storage/storage';
+import { StorageService } from '../../models/storage/storage.service';
 
 const SOUND_ON: boolean = true;
 const DEFAULT_WORK_TIME_DURATION: number = 1500;
@@ -23,7 +23,7 @@ export class PomodoroComponent {
   ];
 
   constructor(
-    private storage: Storage,
+    private storage: StorageService,
   ) {
   }
 

@@ -24,23 +24,9 @@
   }
 }
 
-.app-sidenav-container--menu {
-  padding: 5px;
-}
-
-.app-sidenav-container--content {
-  position: relative;
-  padding: 25px;
-}
-
-.app-sidenav-container--content--open-close-sidenav {
+.btn-open-close-sidenav {
   position: absolute;
   left: -13px;
-}
-
-mat-icon.mat-protected-no-space {
-  margin-right: 0px;
-  margin-left: 0px;
 }
 
 .dragable-taskbar {

@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { Bridge } from '../../models/bridge/bridge';
-import { Window } from '../../models/window/window';
+import { BridgeService } from '../../models/bridge/bridge.service';
 
 @Component({
   selector: 'app-about',
@@ -10,8 +9,7 @@ import { Window } from '../../models/window/window';
 export class AboutComponent {
 
   constructor(
-    public bridge: Bridge, // FIXME It is set to public only to be used temporarily on template for debug pourpose. Can be removed in the future.
-    private window: Window,
+    public bridge: BridgeService, // FIXME It is set to public only to be used temporarily on template for debug pourpose. Can be removed in the future.
   ) {
   }
 

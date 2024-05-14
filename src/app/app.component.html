@@ -1,9 +1,6 @@
 <main>
-  <mat-sidenav-container
-    class="app-sidenav-container"
-    >
+  <mat-sidenav-container class="app-sidenav-container">
     <mat-sidenav
-      class="app-sidenav-container--menu"
       #sidenav mode="side"
       [(opened)]="opened"
       (opened)="handleSidenavOpen()"
@@ -11,14 +8,9 @@
       >
       <app-menu></app-menu>
     </mat-sidenav>
-    <mat-sidenav-content
-      class="app-sidenav-container--content h-100 d-flex align-items-center justify-content-center"
-      >
+    <mat-sidenav-content class="d-flex align-items-center justify-content-center">
       <div class="dragable-taskbar"></div>
-      <app-button
-        class="app-sidenav-container--content--open-close-sidenav"
-        (onClick)="sidenav.toggle()"
-        >
+      <app-button class="btn-open-close-sidenav" (onClick)="sidenav.toggle()">
         <i [class]="opened ? 'fa-solid fa-chevron-left' : 'fa-solid fa-chevron-right'"></i>
       </app-button>
       <router-outlet/>

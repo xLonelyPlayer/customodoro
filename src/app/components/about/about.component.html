@@ -1,16 +1,14 @@
-<div>
-  <div class="row">
-    <div class="col-12 align-items-center">
-      <span>Versão do aplicativo: {{ bridge.getAppVersion() || "Não identificado" }}</span>
-    </div>
-    <div class="col-12 align-items-center">
-      <span>Versão do chrome: {{ bridge.getChromeVersion() || "Não identificado" }}</span>
-    </div>
-    <div class="col-12 align-items-center">
-      <span>Versão do node: {{ bridge.getNodeVersion() || "Não identificado" }}</span>
-    </div>
-    <div class="col-12 align-items-center">
-      <span>Versão do electron: {{ bridge.getElectronVersion() || "Não identificado" }}</span>
-    </div>
+<div class="row">
+  <div class="col-12 text-center">
+    <span>Versão do aplicativo: {{ bridge.getAppVersion() || "Não identificado" }}</span>
+  </div>
+  <div class="col-12 text-center">
+    <span>Versão do chrome: {{ bridge.getChromeVersion() || "Não identificado" }}</span>
+  </div>
+  <div class="col-12 text-center">
+    <span>Versão do node: {{ bridge.getNodeVersion() || "Não identificado" }}</span>
+  </div>
+  <div class="col-12 text-center">
+    <span>Versão do electron: {{ bridge.getElectronVersion() || "Não identificado" }}</span>
   </div>
 </div>

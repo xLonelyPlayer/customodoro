@@ -10,20 +10,22 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { PomodoroComponent } from './components/pomodoro/pomodoro.component';
 import { ButtonComponent } from './components/button/button.component';
 
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
-import { MenuComponent } from './components/menu/menu.component';
 import { MatListModule } from '@angular/material/list';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+
+import { MenuComponent } from './components/menu/menu.component';
 import { AlertComponent } from './components/modals/alert/alert.component';
 import { AboutComponent } from './components/about/about.component'
 
-import { Storage } from './models/storage/storage';
-import { Bridge } from './models/bridge/bridge';
-import { Window } from './models/window/window';
+import { StorageService } from './models/storage/storage.service';
+import { BridgeService } from './models/bridge/bridge.service';
+import { WindowService } from './models/window/window.service';
 
 @NgModule({
   declarations: [
@@ -42,16 +44,18 @@ import { Window } from './models/window/window';
     MatSidenavModule,
     MatCheckboxModule,
     FormsModule,
+    ReactiveFormsModule,
     MatIconModule,
     MatListModule,
     MatGridListModule,
     MatDialogModule,
+    MatSlideToggleModule,
   ],
   providers: [
     provideAnimationsAsync(),
-    Storage,
-    Bridge,
-    Window,
+    StorageService,
+    BridgeService,
+    WindowService,
   ],
   bootstrap: [AppComponent]
 })

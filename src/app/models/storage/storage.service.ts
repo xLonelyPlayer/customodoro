@@ -1,10 +1,12 @@
 import { Injectable } from "@angular/core";
-import { Bridge } from "../bridge/bridge";
+import { BridgeService } from "../bridge/bridge.service";
 
-@Injectable()
-export class Storage {
+@Injectable({
+  providedIn: 'root'
+})
+export class StorageService {
 
-  constructor(private bridge: Bridge) {
+  constructor(private bridge: BridgeService) {
   }
 
   set(key: string, value: any) {

@@ -1,7 +1,7 @@
-import { Window } from './window';
+import { WindowService } from './window.service';
 
 describe('Window', () => {
   it('should create an instance', () => {
-    expect(new Window()).toBeTruthy();
+    expect(new WindowService()).toBeTruthy();
   });
 });

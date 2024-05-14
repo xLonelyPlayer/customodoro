@@ -1,4 +1,9 @@
-export class Bridge {
+import { Injectable } from "@angular/core";
+
+@Injectable({
+  providedIn: 'root'
+})
+export class BridgeService {
   private browserWindow: BrowserWindow = window as any;
   private versions: AppVersions = this.browserWindow.versions;
   private events: AppEvents = this.browserWindow.events;

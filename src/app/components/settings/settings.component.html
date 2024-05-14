@@ -1,7 +1,26 @@
-<div>
-  <div class="row">
-    <div class="col-12">
-      <h2>Settings</h2>
-    </div>
+<div class="row">
+  <div class="col-12 mb-4">
+    <h2>Settings</h2>
   </div>
 </div>
+<form [formGroup]="form" (ngSubmit)="save()">
+  <div class="row form-group" formGroupName="notification">
+    <h4>Notificações</h4>
+    <div class="form-control col-12">
+      <mat-slide-toggle formControlName="active">
+        <label class="mat-slide-toggle-label">Ativar notificações</label>
+      </mat-slide-toggle>
+    </div>
+    <div class="form-control col-12">
+      <mat-slide-toggle formControlName="sound">
+        <label class="mat-slide-toggle-label">Efeito sonoro</label>
+      </mat-slide-toggle>
+    </div>
+  </div>
+  <div class="row mt-4">
+    <app-button type="submit">
+      <i class="fa-solid fa-floppy-disk"></i>
+      <span>Save</span>
+    </app-button>
+  </div>
+</form>
