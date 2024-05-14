@@ -10,7 +10,7 @@
     "test": "ng test",
     "electron": "electron .",
     "electron-build": "ng build --configuration production && electron .",
-    "package": "electron-packager . --platform=win32 --overwrite"
+    "package": "ng build --configuration production && electron-packager . --platform=win32 --overwrite"
   },
   "private": true,
   "dependencies": {

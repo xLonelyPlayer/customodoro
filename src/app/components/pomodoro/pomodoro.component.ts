@@ -3,8 +3,8 @@ import { StorageService } from '../../models/storage/storage.service';
 import { AlternateCycleOptions, Cycle } from '../../views/pomodoro';
 import { EnvironmentService } from '../../models/environment/environment.service';
 
-const DEFAULT_WORK_TIME_DURATION: number = 10;
-const DEFAULT_SHORT_BREAK_DURATION: number = 5;
+const DEFAULT_WORK_TIME_DURATION: number = 1500;
+const DEFAULT_SHORT_BREAK_DURATION: number = 300;
 
 @Component({
   selector: 'app-pomodoro',
