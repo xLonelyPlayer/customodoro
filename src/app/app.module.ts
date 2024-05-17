@@ -27,6 +27,8 @@ import { StorageService } from './models/storage/storage.service';
 import { BridgeService } from './models/bridge/bridge.service';
 import { WindowService } from './models/window/window.service';
 import { EnvironmentService } from './models/environment/environment.service';
+import { SliderComponent } from './components/slider/slider.component';
+import { SliderListComponent } from './components/slider-list/slider-list.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +40,8 @@ import { EnvironmentService } from './models/environment/environment.service';
     ButtonComponent,
     AlertComponent,
     AboutComponent,
+    SliderComponent,
+    SliderListComponent,
   ],
   imports: [
     BrowserModule,

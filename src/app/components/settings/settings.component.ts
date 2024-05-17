@@ -13,6 +13,12 @@ export class SettingsComponent {
 
   form: FormGroup;
 
+  sliderList = [
+    { control: 'notify', label: 'Activate notifications' },
+    { control: 'sound', label: 'Sound effect' },
+    { control: 'soundOnSkip', label: 'Sound effect on skip' },
+  ];
+
   constructor(
     private storage: StorageService,
     private env: EnvironmentService
@@ -22,8 +28,12 @@ export class SettingsComponent {
         notify: new FormControl(true),
         sound: new FormControl(true),
         soundOnSkip: new FormControl(false),
-      })
+      }),
     });
+  }
+
+  get formNotification() {
+    return this.form.get('notification') as FormGroup;
   }
 
   ngOnInit() {

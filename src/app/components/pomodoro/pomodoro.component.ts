@@ -126,6 +126,9 @@ export class PomodoroComponent {
   }
 
   handleOnStart(_e: Event): void {
+    if (this.at_work) {
+      return;
+    }
     this.at_work = true;
     this.workCycle();
     this.storageSaver = this.startStorageSaver();

@@ -1,0 +1,7 @@
+<form [formGroup]="sliderForm">
+  <div *ngFor="let slider of sliderList">
+    <app-slider class="form-control" [formControlName]="slider.control">
+      <label>{{ slider.label }}</label>
+    </app-slider>
+  </div>
+</form>
